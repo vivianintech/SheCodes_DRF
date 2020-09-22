@@ -132,9 +132,16 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+<<<<<<< Updated upstream
 
+=======
+>>>>>>> Stashed changes
 venv/*
 __pycache__
 *.sqlite3
 *.vscode
+<<<<<<< Updated upstream
 staticfiles
+=======
+staticfiles
+>>>>>>> Stashed changes
