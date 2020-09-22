@@ -2,7 +2,7 @@ from django.shortcuts import render
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from .models import Project, Pledge
-from .serializers import ProjectSerializer, PledgeSerializer, ProjectDetailSerializer
+from .serializers import ProjectSerializer, PledgeSerializer, ProjectDetailSerializer, PledgeDetailSerializer
 from django.http import Http404
 from rest_framework import status, permissions
 from .permissions import IsOwnerOrReadOnly
@@ -100,3 +100,16 @@ class PledgeDetail(APIView):
         pledge = self.get_object(pk)
         serializer = PledgeSerializer(pledge)
         return Response(serializer.data)
+
+    def put(self, request, pk):
+        pledge = self. get_object(pk)
+        data = request.data
+        serializer = PledgeDetailSerializer(
+            instance = pledge,
+            data=data,
+            partial=True
+        )
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors)
