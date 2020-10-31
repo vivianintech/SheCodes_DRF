@@ -28,9 +28,9 @@ class ProjectSerializer(serializers.Serializer):
     description = serializers.CharField(max_length=None)
     goal = serializers.IntegerField()
     image = serializers.URLField()
-    is_open = serializers.BooleanField()
-    date_created = serializers.DateTimeField()
-    date_updated = serializers.DateTimeField()
+    is_open = serializers.ReadOnlyField()
+    date_created = serializers.ReadOnlyField()
+    date_updated = serializers.ReadOnlyField()
     owner =serializers.ReadOnlyField(source='owner.id')
 
     def create(self, validated_data):
