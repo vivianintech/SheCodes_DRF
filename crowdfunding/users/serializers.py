@@ -9,7 +9,7 @@ class CustomUserSerializer(serializers.Serializer):
     phone_number = serializers.CharField(max_length=15)
     address = serializers.CharField(max_length=300)
     profile_image = serializers.URLField()
-    active = serializers.BooleanField()
+    active = serializers.ReadOnlyField()
 
     def create(self, validated_data):
         return CustomUser.objects.create_user(**validated_data)
