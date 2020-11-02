@@ -20,19 +20,50 @@ class CustomUserList(APIView):
         return Response(serializer.errors)
 
 class CustomUserDetail(APIView):
-    def get_object(self, pk):
+    # def get_object(self, pk):
+    #     try: 
+    #         return CustomUser.objects.get(pk=pk)
+    #     except CustomUser.DoesNotExist:
+    #         raise Http404
+
+    # def get(self, request, pk):
+    #     user = self.get_object(pk)
+    #     serializer = CustomUserSerializer(user)
+    #     return Response(serializer.data)
+
+    # def put(self, request, pk):
+    #     user = self.get_object(pk)
+    #     data = request.data
+    #     serializer = CustomUserDetailSerializer(
+    #         instance = user,
+    #         data=data,
+    #         partial=True
+    #     )
+    #     if serializer.is_valid():
+    #         serializer.save()
+    #         return Response(serializer.data)
+    #     return Response(serializer.errors)
+
+    # def delete(self, request, pk):
+    #     user = self.get_object(pk)
+    #     user.delete()
+    #     return Response(   
+    #         status=status.HTTP_204_NO_CONTENT
+    #     )
+
+    def get_object(self, username):
         try: 
-            return CustomUser.objects.get(pk=pk)
+            return CustomUser.objects.get(username=username)
         except CustomUser.DoesNotExist:
             raise Http404
 
-    def get(self, request, pk):
-        user = self.get_object(pk)
+    def get(self, request, username):
+        user = self.get_object(username)
         serializer = CustomUserSerializer(user)
         return Response(serializer.data)
 
-    def put(self, request, pk):
-        user = self.get_object(pk)
+    def put(self, request, username):
+        user = self.get_object(username)
         data = request.data
         serializer = CustomUserDetailSerializer(
             instance = user,
@@ -44,8 +75,8 @@ class CustomUserDetail(APIView):
             return Response(serializer.data)
         return Response(serializer.errors)
 
-    def delete(self, request, pk):
-        user = self.get_object(pk)
+    def delete(self, request, username):
+        user = self.get_object(username)
         user.delete()
         return Response(   
             status=status.HTTP_204_NO_CONTENT
